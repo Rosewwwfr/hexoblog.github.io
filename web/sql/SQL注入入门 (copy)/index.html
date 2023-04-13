@@ -1,0 +1,313 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>白费时间的sql文章 | Rose's Blog</title><meta name="author" content="Rose"><meta name="copyright" content="Rose"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="前言：总结自《ctf  从0到1》 花了时间看，总结，但是进步不是很明显。真的离谱。不能这样学！！！ 应该把它当作是工具。 SQL注入基础一个重要的库information_schema 数据库 存储着数据库中的库名、表名以及字段名。 其中的表：  tables  存放着  表名，字段名是table_name columns  存放着 字段名 ，字段名为  columns_name  table_">
+<meta property="og:type" content="article">
+<meta property="og:title" content="白费时间的sql文章">
+<meta property="og:url" content="https://rosewwwfr.github.io/web/sql/SQL%E6%B3%A8%E5%85%A5%E5%85%A5%E9%97%A8%20(copy)/index.html">
+<meta property="og:site_name" content="Rose&#39;s Blog">
+<meta property="og:description" content="前言：总结自《ctf  从0到1》 花了时间看，总结，但是进步不是很明显。真的离谱。不能这样学！！！ 应该把它当作是工具。 SQL注入基础一个重要的库information_schema 数据库 存储着数据库中的库名、表名以及字段名。 其中的表：  tables  存放着  表名，字段名是table_name columns  存放着 字段名 ，字段名为  columns_name  table_">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://rose-1317018836.cos.ap-guangzhou.myqcloud.com/9b48ce68bf64b3cc93f2b9cd0a956cfd.jpg">
+<meta property="article:published_time" content="2023-04-13T14:50:34.435Z">
+<meta property="article:modified_time" content="2023-04-13T14:51:32.459Z">
+<meta property="article:author" content="Rose">
+<meta property="article:tag" content="sql">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://rose-1317018836.cos.ap-guangzhou.myqcloud.com/9b48ce68bf64b3cc93f2b9cd0a956cfd.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://rosewwwfr.github.io/web/sql/SQL%E6%B3%A8%E5%85%A5%E5%85%A5%E9%97%A8%20(copy)/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '白费时间的sql文章',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-04-13 22:51:32'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://rose-1317018836.cos.ap-guangzhou.myqcloud.com/9b48ce68bf64b3cc93f2b9cd0a956cfd.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">5</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">7</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://rose-1317018836.cos.ap-guangzhou.myqcloud.com/cd658d81c36ef6e28c802c81531762be.jpeg')"><nav id="nav"><span id="blog-info"><a href="/" title="Rose's Blog"><span class="site-name">Rose's Blog</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">白费时间的sql文章</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-04-13T14:50:34.435Z" title="发表于 2023-04-13 22:50:34">2023-04-13</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-04-13T14:51:32.459Z" title="更新于 2023-04-13 22:51:32">2023-04-13</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/web/">web</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/web/sql/">sql</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="白费时间的sql文章"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>前言：总结自《ctf  从0到1》</p>
+<p>花了时间看，总结，但是进步不是很明显。真的离谱。不能这样学！！！</p>
+<p>应该把它当作是工具。</p>
+<h2 id="SQL注入基础"><a href="#SQL注入基础" class="headerlink" title="SQL注入基础"></a>SQL注入基础</h2><h4 id="一个重要的库"><a href="#一个重要的库" class="headerlink" title="一个重要的库"></a>一个重要的库</h4><p><code>information_schema</code> 数据库</p>
+<p>存储着数据库中的库名、表名以及字段名。</p>
+<p>其中的表：</p>
+<ul>
+<li>tables  存放着  表名，字段名是table_name</li>
+<li>columns  存放着 字段名 ，字段名为  columns_name</li>
+</ul>
+<p>table_schema  是tables表中的一个字段信息，对应着一个个数据库。可以用where 来看。</p>
+<h4 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h4><p>group_concat()  联合记录，用，隔开。</p>
+<p>concat  也是联合查询。</p>
+<h4 id="limit"><a href="#limit" class="headerlink" title="limit"></a>limit</h4><p>限制输出的行数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">limit 1， 1</span><br><span class="line">表示在第1行开始输出1行</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="基础思路"><a href="#基础思路" class="headerlink" title="基础思路"></a>基础思路</h4><p>通过上方的库，查找到有什么库，有什么表，有什么字段。</p>
+<p>再查询具体表，字段对应的信息。</p>
+<ul>
+<li><p>查看当前数据库中有哪些表。</p>
+<ul>
+<li>&#96;&#96;&#96;<br>id &#x3D; -1 union select 1, group_concat(table_name) from information_schema.tables where table_schema &#x3D; database()<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 查询某个表中有哪些字段</span><br><span class="line"></span><br><span class="line">  - ```</span><br><span class="line">    id = -1 union select 1, group_concat(columns_name) from information_schema.columns where table_name = &quot;....&quot;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>最后查询有表中的信息即可。</p>
+</li>
+</ul>
+<h3 id="数字型注入和union注入"><a href="#数字型注入和union注入" class="headerlink" title="数字型注入和union注入"></a>数字型注入和union注入</h3><p>数据库查询语句，注入点在WHERE</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM wp_news where id = &quot;GET[&#x27;hack&#x27;]&quot;</span><br><span class="line">SELECT * FROM wp_news where id = 1</span><br></pre></td></tr></table></figure>
+
+<p>就是不需要进行额外的操作就可以进行注入了。</p>
+<p>这里一般情况下，是不可能回显很多行的，就需要通同limit去限制输出第几行。</p>
+<p>或者通过  id &#x3D;-1 或者很多的值，使之回显不了，从而回显我门想要的数据。</p>
+<h4 id="判断方法："><a href="#判断方法：" class="headerlink" title="判断方法："></a>判断方法：</h4><p>通过输入  2  和  3-1  看回显是否相同。如果不同就不是数字型。</p>
+<h3 id="字符型"><a href="#字符型" class="headerlink" title="字符型"></a>字符型</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM wp_news where id = &#x27;&quot;GET[&#x27;hack&#x27;]&quot;&#x27;</span><br><span class="line">SELECT * FROM wp_news where id = &#x27;1&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>在数据外包裹  单引号或者双引号。</p>
+<p>所以就需要闭合前面的引号，然后注释（或者闭合）掉后面的引号。</p>
+<p>注释用需要用编码格式。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">--%20  和  %23 （#）</span><br><span class="line">%27是单引号。</span><br></pre></td></tr></table></figure>
+
+<p>常构造</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id = 1&#x27; or 1 = &#x27;1  这样就相当于一个万能钥匙。</span><br></pre></td></tr></table></figure>
+
+<h3 id="布尔盲注"><a href="#布尔盲注" class="headerlink" title="布尔盲注"></a>布尔盲注</h3><p>就是如果查询语句正确，就会回显东西。如果flase就会显示空白。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">where id = ‘1’ and &#x27;[在这放个条件]&#x27;</span><br><span class="line">比如    &quot;select ....&quot; = &#x27;...&#x27;</span><br><span class="line">就能够从回显中得到一些信息。</span><br></pre></td></tr></table></figure>
+
+<h4 id="需要用到的函数"><a href="#需要用到的函数" class="headerlink" title="需要用到的函数"></a>需要用到的函数</h4><ul>
+<li>substring() 、mid() 、substr()</li>
+</ul>
+<p>三个函数的功能基本是一样的。</p>
+<p>都是两个参数。</p>
+<p>substr(n1,n2)</p>
+<ul>
+<li>n1为从第几位开始截取。</li>
+<li>n2为截取几位。</li>
+</ul>
+<p><strong>结合二分法。</strong>进行信息的判断。</p>
+<h3 id="时间盲注"><a href="#时间盲注" class="headerlink" title="时间盲注"></a>时间盲注</h3><p>就需要用到if函数（或者and或者or的短路特性）和sleep()函数</p>
+<h3 id="报错注入"><a href="#报错注入" class="headerlink" title="报错注入"></a>报错注入</h3><p>有些网站，在	sql语句错误的时候，会输出错误信息。</p>
+<h4 id="可利用利用函数"><a href="#可利用利用函数" class="headerlink" title="可利用利用函数"></a>可利用利用函数</h4><p><code>updatexml</code> 第二个参数应该是XPATH路径，否则就会在引发报错的同时，将传入的参数进行输出。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id=1&#x27; or updatexml(1,concat(0x7e,(select pwd from wp_user)),1)%23</span><br></pre></td></tr></table></figure>
+
+<h3 id="堆叠注入"><a href="#堆叠注入" class="headerlink" title="堆叠注入"></a>堆叠注入</h3><p>目标开启多语句执行的时候，可以修改数据库的任意结构和数据。</p>
+<h2 id="注入点"><a href="#注入点" class="headerlink" title="注入点"></a>注入点</h2><p>前面基本都是在where点注入的。还有很多情况。</p>
+<h3 id="SELECT注入"><a href="#SELECT注入" class="headerlink" title="SELECT注入"></a>SELECT注入</h3><p>就是在通过SELECT语句的注入</p>
+<h4 id="注入点在select-expr"><a href="#注入点在select-expr" class="headerlink" title="注入点在select_expr"></a>注入点在select_expr</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select GET[&#x27;id&#x27;] FROM ....</span><br></pre></td></tr></table></figure>
+
+<p>还是得配合<code>information_schema</code> 数据库</p>
+<p>可以使用时间盲注，但是，<strong>AS别名法</strong>更好。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id=(select pwd from ... ) as title</span><br></pre></td></tr></table></figure>
+
+<h4 id="table-reference"><a href="#table-reference" class="headerlink" title="table_reference"></a>table_reference</h4><p>也就是from后位置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select title from GET[&#x27;id&#x27;]</span><br></pre></td></tr></table></figure>
+
+<p>仍然可以用别名。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id = select pwd as title from wp_user</span><br></pre></td></tr></table></figure>
+
+<p>如果前两种方法被反引号包裹，需要把反引号闭合。</p>
+<h4 id="WHERE-或者HAVING"><a href="#WHERE-或者HAVING" class="headerlink" title="WHERE 或者HAVING"></a>WHERE 或者HAVING</h4><p>WHERE  就是前面基础时的，也是最常见的。</p>
+<p>HAVING和其一样，但是我还没见过</p>
+<h4 id="GROUP-BY-、ORDER-BY-（晕晕）"><a href="#GROUP-BY-、ORDER-BY-（晕晕）" class="headerlink" title="GROUP BY 、ORDER BY （晕晕）"></a>GROUP BY 、ORDER BY （晕晕）</h4><p>当遇到不是在WHERE时，就需要在本地进行测试。看语句后面能够加什么。</p>
+<p>举个例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select title from wp group by GET[&#x27;title&#x27;]</span><br></pre></td></tr></table></figure>
+
+<p>是可以用时间盲注的。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">title = id desc ,(if(1,sleep,1))  </span><br></pre></td></tr></table></figure>
+
+<p>会让页面迟一秒。</p>
+<h4 id="LIMIT（晕晕）"><a href="#LIMIT（晕晕）" class="headerlink" title="LIMIT（晕晕）"></a>LIMIT（晕晕）</h4><p>只能是数字型的。</p>
+<p>判断方法：通过修改数字，会显示更多或者更少的记录数。</p>
+<p>利用方法：</p>
+<ul>
+<li><p>如果没有order by 关键字的话，可以使用UNION注入</p>
+</li>
+<li><p>MySQL5.6前可以使用PROCEDURE 尝试注入</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">limit 1 procedure analyse(extractvalue(1,concat()),1);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>也可以配合上时间盲注使用</li>
+</ul>
+</li>
+</ul>
+<p>如果有写入权限，还可以使用 into outfile 语句向WEB目录写入webshell。</p>
+<h3 id="INSERT注入"><a href="#INSERT注入" class="headerlink" title="INSERT注入"></a>INSERT注入</h3><p>插入数据表记录的语句。</p>
+<h4 id="tbl-name"><a href="#tbl-name" class="headerlink" title="tbl_name"></a>tbl_name</h4><p>注释掉后面的值，写入自己想要写入的值。比如向管理员表插入信息。</p>
+<h4 id="value"><a href="#value" class="headerlink" title="value"></a>value</h4><p>先闭合前面的引号，再插入想要插入的数据。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">insert into wp_user value (1,1,&#x27;GET[&#x27;id&#x27;]&#x27;);</span><br><span class="line">id = 1&#x27;),(2,1,&#x27;aaa&#x27;);#</span><br><span class="line">insert into wp_user value (1,1,&#x27;1&#x27;),(2,1,&#x27;aaa&#x27;);#);</span><br></pre></td></tr></table></figure>
+
+<p>一般情况下管理员和用户同同一个表。</p>
+<p>加入第二个是管理员标识，便可以插入一个管理员用户。</p>
+<p>如果有数据会回显，也可以将查询语句插入到那个位置。</p>
+<h3 id="UPDATE注入"><a href="#UPDATE注入" class="headerlink" title="UPDATE注入"></a>UPDATE注入</h3><p>用于数据库记录的更新。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">update 表 set id = 1 where user = &#x27;23&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>就比如说id 可控，就可以修改数据。如果可以回显，就直接插入查询语句。</p>
+<p>where注入点则和前面的一样。</p>
+<h4 id="DELETE注入"><a href="#DELETE注入" class="headerlink" title="DELETE注入"></a>DELETE注入</h4><p>如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">delete from wp_news where id = GET[&#x27;id&#x27;]</span><br></pre></td></tr></table></figure>
+
+<p>如果where是TRUE的话，就会被全部删掉。</p>
+<p>为了避免，通常加入  and sleep(1)，确保where后是FLASE。让delete语句无法执行,只执行恶意语句。</p>
+<h2 id="注入防御"><a href="#注入防御" class="headerlink" title="注入防御"></a>注入防御</h2><p>也就是学会如果绕过过滤。</p>
+<h3 id="字符替换"><a href="#字符替换" class="headerlink" title="字符替换"></a>字符替换</h3><h4 id="只过滤了空格"><a href="#只过滤了空格" class="headerlink" title="只过滤了空格"></a>只过滤了空格</h4><p>用以下替代</p>
+<ul>
+<li>%0a b c d</li>
+<li>%09</li>
+<li>%a0  只有在特定的字符集中才能利用。</li>
+<li>&#x2F;**&#x2F;</li>
+<li>括号</li>
+</ul>
+<h4 id="将select替换位空"><a href="#将select替换位空" class="headerlink" title="将select替换位空"></a>将select替换位空</h4><p>双写绕过即可</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">selselectect</span><br><span class="line">替换掉select后</span><br><span class="line">select</span><br></pre></td></tr></table></figure>
+
+<h4 id="大小写匹配"><a href="#大小写匹配" class="headerlink" title="大小写匹配"></a>大小写匹配</h4><p>MySQL是不区分大小写的，如果只匹配了大写或者小写，可以混合使用，绕过。</p>
+<h4 id="过滤了单双引号，但是忘记了反斜杠。"><a href="#过滤了单双引号，但是忘记了反斜杠。" class="headerlink" title="过滤了单双引号，但是忘记了反斜杠。"></a>过滤了单双引号，但是忘记了反斜杠。</h4><p>就是字符型的。</p>
+<p>然后查询语句中有2对相同的引号。</p>
+<p>就可以用反斜杠搞掉前面的后一个引号，和第二个的后一个配对。</p>
+<h3 id="引号逃逸"><a href="#引号逃逸" class="headerlink" title="引号逃逸"></a>引号逃逸</h3><p>注入的重点在于引号逃逸。</p>
+<h4 id="编码解码"><a href="#编码解码" class="headerlink" title="编码解码"></a>编码解码</h4><p>解决转义问题。</p>
+<p>数据处于编码，无法被转义。</p>
+<p>base64常用。</p>
+<h4 id="意料之外的输入点"><a href="#意料之外的输入点" class="headerlink" title="意料之外的输入点"></a>意料之外的输入点</h4><p>就是被开发者忽略的一些可控点。</p>
+<h4 id="二次注入"><a href="#二次注入" class="headerlink" title="二次注入"></a>二次注入</h4><p>就是引号第一次被转义了后，放到数据库了。</p>
+<p>再一次调用它的时候就会出现问题</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#x27;admin ’or &#x27;1&#x27; </span><br><span class="line">被转义后就放进数据库</span><br><span class="line">再被调用时</span><br><span class="line">&#x27;admin ’or &#x27;1&#x27;</span><br><span class="line">这样就是TRUE  可能会导致一些操作，如删库等等。</span><br></pre></td></tr></table></figure>
+
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://rosewwwfr.github.io">Rose</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://rosewwwfr.github.io/web/sql/SQL%E6%B3%A8%E5%85%A5%E5%85%A5%E9%97%A8%20(copy)/">https://rosewwwfr.github.io/web/sql/SQL%E6%B3%A8%E5%85%A5%E5%85%A5%E9%97%A8%20(copy)/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://rosewwwfr.github.io" target="_blank">Rose's Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/sql/">sql</a></div><div class="post_share"><div class="social-share" data-image="https://rose-1317018836.cos.ap-guangzhou.myqcloud.com/9b48ce68bf64b3cc93f2b9cd0a956cfd.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/Linux/Linux%E7%B3%BB%E7%BB%9F3/" title="Linux学习-3"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Linux学习-3</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://rose-1317018836.cos.ap-guangzhou.myqcloud.com/9b48ce68bf64b3cc93f2b9cd0a956cfd.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Rose</div><div class="author-info__description">今日事，今日毕</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">5</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">7</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#SQL%E6%B3%A8%E5%85%A5%E5%9F%BA%E7%A1%80"><span class="toc-number">1.</span> <span class="toc-text">SQL注入基础</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%80%E4%B8%AA%E9%87%8D%E8%A6%81%E7%9A%84%E5%BA%93"><span class="toc-number">1.0.1.</span> <span class="toc-text">一个重要的库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%87%BD%E6%95%B0"><span class="toc-number">1.0.2.</span> <span class="toc-text">函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#limit"><span class="toc-number">1.0.3.</span> <span class="toc-text">limit</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E6%80%9D%E8%B7%AF"><span class="toc-number">1.0.4.</span> <span class="toc-text">基础思路</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E5%AD%97%E5%9E%8B%E6%B3%A8%E5%85%A5%E5%92%8Cunion%E6%B3%A8%E5%85%A5"><span class="toc-number">1.1.</span> <span class="toc-text">数字型注入和union注入</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%A4%E6%96%AD%E6%96%B9%E6%B3%95%EF%BC%9A"><span class="toc-number">1.1.1.</span> <span class="toc-text">判断方法：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E5%9E%8B"><span class="toc-number">1.2.</span> <span class="toc-text">字符型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%83%E5%B0%94%E7%9B%B2%E6%B3%A8"><span class="toc-number">1.3.</span> <span class="toc-text">布尔盲注</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9C%80%E8%A6%81%E7%94%A8%E5%88%B0%E7%9A%84%E5%87%BD%E6%95%B0"><span class="toc-number">1.3.1.</span> <span class="toc-text">需要用到的函数</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%B6%E9%97%B4%E7%9B%B2%E6%B3%A8"><span class="toc-number">1.4.</span> <span class="toc-text">时间盲注</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5"><span class="toc-number">1.5.</span> <span class="toc-text">报错注入</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%AF%E5%88%A9%E7%94%A8%E5%88%A9%E7%94%A8%E5%87%BD%E6%95%B0"><span class="toc-number">1.5.1.</span> <span class="toc-text">可利用利用函数</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A0%86%E5%8F%A0%E6%B3%A8%E5%85%A5"><span class="toc-number">1.6.</span> <span class="toc-text">堆叠注入</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B3%A8%E5%85%A5%E7%82%B9"><span class="toc-number">2.</span> <span class="toc-text">注入点</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#SELECT%E6%B3%A8%E5%85%A5"><span class="toc-number">2.1.</span> <span class="toc-text">SELECT注入</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B3%A8%E5%85%A5%E7%82%B9%E5%9C%A8select-expr"><span class="toc-number">2.1.1.</span> <span class="toc-text">注入点在select_expr</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#table-reference"><span class="toc-number">2.1.2.</span> <span class="toc-text">table_reference</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#WHERE-%E6%88%96%E8%80%85HAVING"><span class="toc-number">2.1.3.</span> <span class="toc-text">WHERE 或者HAVING</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#GROUP-BY-%E3%80%81ORDER-BY-%EF%BC%88%E6%99%95%E6%99%95%EF%BC%89"><span class="toc-number">2.1.4.</span> <span class="toc-text">GROUP BY 、ORDER BY （晕晕）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#LIMIT%EF%BC%88%E6%99%95%E6%99%95%EF%BC%89"><span class="toc-number">2.1.5.</span> <span class="toc-text">LIMIT（晕晕）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#INSERT%E6%B3%A8%E5%85%A5"><span class="toc-number">2.2.</span> <span class="toc-text">INSERT注入</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#tbl-name"><span class="toc-number">2.2.1.</span> <span class="toc-text">tbl_name</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#value"><span class="toc-number">2.2.2.</span> <span class="toc-text">value</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#UPDATE%E6%B3%A8%E5%85%A5"><span class="toc-number">2.3.</span> <span class="toc-text">UPDATE注入</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#DELETE%E6%B3%A8%E5%85%A5"><span class="toc-number">2.3.1.</span> <span class="toc-text">DELETE注入</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B3%A8%E5%85%A5%E9%98%B2%E5%BE%A1"><span class="toc-number">3.</span> <span class="toc-text">注入防御</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E6%9B%BF%E6%8D%A2"><span class="toc-number">3.1.</span> <span class="toc-text">字符替换</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%AA%E8%BF%87%E6%BB%A4%E4%BA%86%E7%A9%BA%E6%A0%BC"><span class="toc-number">3.1.1.</span> <span class="toc-text">只过滤了空格</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B0%86select%E6%9B%BF%E6%8D%A2%E4%BD%8D%E7%A9%BA"><span class="toc-number">3.1.2.</span> <span class="toc-text">将select替换位空</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%A7%E5%B0%8F%E5%86%99%E5%8C%B9%E9%85%8D"><span class="toc-number">3.1.3.</span> <span class="toc-text">大小写匹配</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%87%E6%BB%A4%E4%BA%86%E5%8D%95%E5%8F%8C%E5%BC%95%E5%8F%B7%EF%BC%8C%E4%BD%86%E6%98%AF%E5%BF%98%E8%AE%B0%E4%BA%86%E5%8F%8D%E6%96%9C%E6%9D%A0%E3%80%82"><span class="toc-number">3.1.4.</span> <span class="toc-text">过滤了单双引号，但是忘记了反斜杠。</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%95%E5%8F%B7%E9%80%83%E9%80%B8"><span class="toc-number">3.2.</span> <span class="toc-text">引号逃逸</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BC%96%E7%A0%81%E8%A7%A3%E7%A0%81"><span class="toc-number">3.2.1.</span> <span class="toc-text">编码解码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%84%8F%E6%96%99%E4%B9%8B%E5%A4%96%E7%9A%84%E8%BE%93%E5%85%A5%E7%82%B9"><span class="toc-number">3.2.2.</span> <span class="toc-text">意料之外的输入点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8C%E6%AC%A1%E6%B3%A8%E5%85%A5"><span class="toc-number">3.2.3.</span> <span class="toc-text">二次注入</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/web/sql/SQL%E6%B3%A8%E5%85%A5%E5%85%A5%E9%97%A8%20(copy)/" title="白费时间的sql文章">白费时间的sql文章</a><time datetime="2023-04-13T14:50:34.435Z" title="发表于 2023-04-13 22:50:34">2023-04-13</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/Linux/Linux%E7%B3%BB%E7%BB%9F3/" title="Linux学习-3">Linux学习-3</a><time datetime="2023-04-09T07:29:44.066Z" title="发表于 2023-04-09 15:29:44">2023-04-09</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/Linux/Linux%E7%B3%BB%E7%BB%9F2%20(copy)/" title="Linux学习-2">Linux学习-2</a><time datetime="2023-04-09T07:20:28.876Z" title="发表于 2023-04-09 15:20:28">2023-04-09</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/Linux/Linux%E7%B3%BB%E7%BB%9F-1%20(copy)/" title="Linux学习-1">Linux学习-1</a><time datetime="2023-04-06T04:37:54.280Z" title="发表于 2023-04-06 12:37:54">2023-04-06</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/ctfweb/%E6%9C%AA%E5%AD%A6%E5%AE%8C/%E6%97%A0%E6%95%B0%E5%AD%97%E5%AD%97%E6%AF%8Dwebshell/" title="无数字字母基础篇">无数字字母基础篇</a><time datetime="2023-03-04T02:10:58.140Z" title="发表于 2023-03-04 10:10:58">2023-03-04</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By Rose</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
